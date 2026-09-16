@@ -59,7 +59,9 @@
     if (frame && hero && stage) {
       const distance = Math.max(1, hero.offsetHeight - stage.offsetHeight);
       const amount = Math.max(0, Math.min(1, -hero.getBoundingClientRect().top / distance));
-      const endScale = window.innerWidth <= 600 ? .82 : .7;
+      const content = document.querySelector('.about-layout');
+      const gutter = content ? parseFloat(getComputedStyle(content).paddingLeft) : 0;
+      const endScale = Math.max(0, Math.min(1, (stage.clientWidth - gutter * 2) / stage.clientWidth));
       const eased = amount * amount * (3 - 2 * amount);
       frame.style.transform = `scale(${1 - (1 - endScale) * eased})`;
     }
