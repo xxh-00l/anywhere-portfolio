@@ -55,11 +55,7 @@
     if (hero && header) {
       header.classList.toggle('header-over-content', hero.getBoundingClientRect().bottom <= header.offsetHeight);
     }
-    if (reduced.matches) {
-      if (frame) frame.style.removeProperty('transform');
-      if (beliefs) beliefs.style.removeProperty('transform');
-      return;
-    }
+    // The hero follows the user's scroll directly; it has no autoplay or inertia.
     if (frame && hero && stage) {
       const distance = Math.max(1, hero.offsetHeight - stage.offsetHeight);
       const amount = Math.max(0, Math.min(1, -hero.getBoundingClientRect().top / distance));
@@ -67,7 +63,9 @@
       const eased = amount * amount * (3 - 2 * amount);
       frame.style.transform = `scale(${1 - (1 - endScale) * eased})`;
     }
-    if (beliefs) {
+    if (beliefs && reduced.matches) {
+      beliefs.style.removeProperty('transform');
+    } else if (beliefs) {
       const rect = beliefs.parentElement.getBoundingClientRect();
       const progress = Math.max(-1, Math.min(1, (window.innerHeight * .6 - rect.top) / window.innerHeight));
       beliefs.style.transform = `translateX(calc(-50% - ${progress * 65}px))`;
@@ -77,7 +75,12 @@
   if (frame || beliefs) {
     window.addEventListener('scroll', schedule, {passive:true});
     window.addEventListener('resize', schedule, {passive:true});
-    reduced.addEventListener('change', schedule);
+    window.addEventListener('pageshow', schedule);
+    if (typeof reduced.addEventListener === 'function') {
+      reduced.addEventListener('change', schedule);
+    } else if (typeof reduced.addListener === 'function') {
+      reduced.addListener(schedule);
+    }
     paint();
   }
 })();
