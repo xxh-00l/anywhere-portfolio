@@ -71,3 +71,6 @@
 .archive-grid .project-meta>span{text-align:left}
 .archive-footer{margin:0 var(--pad);padding:36px 0 42px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:32px}
 @media(max-width:600px){.about-personal .about-copy h2{font-size:clamp(1.7rem,6.5vw,2.2rem);margin-bottom:24px}.about-personal .about-copy>p{font-size:1rem;line-height:1.85}.work-actions{gap:18px}.all-projects-link{font-size:.8125rem}.work .section-bar{gap:12px}.contact-info>div .contact-email{font-size:1.125rem}.project-archive{padding:30px var(--pad) 80px}.archive-top .return-link,.archive-top .eyebrow{font-size:.75rem}.project-archive h1{font-size:clamp(2.5rem,10vw,3.75rem);margin:55px 0 40px}.archive-grid{grid-template-columns:1fr;gap:48px}.archive-grid .project-meta h2{font-size:1.65rem}.archive-footer{flex-direction:column;align-items:flex-start;padding:30px 0;gap:26px}.archive-footer .contact-email{font-size:.9375rem}}
+
+.corporate-page .case-intro h1{overflow-wrap:anywhere;font-size:clamp(2.5rem,10vw,12rem)}
+.project-meta h3{overflow-wrap:anywhere}
